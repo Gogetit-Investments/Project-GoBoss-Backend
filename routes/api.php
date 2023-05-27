@@ -292,9 +292,9 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
     Route::apiResource('coupons', CouponController::class, [
         'only' => ['store', 'update', 'destroy'],
     ]);
-    Route::apiResource('order-status', OrderStatusController::class, [
-        'only' => ['store', 'update', 'destroy'],
-    ]);
+    // Route::apiResource('order-status', OrderStatusController::class, [
+    //     'only' => ['store', 'update', 'destroy'],
+    // ]);
     Route::apiResource('reviews', ReviewController::class, [
         'only' => ['destroy']
     ]);
