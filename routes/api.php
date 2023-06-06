@@ -37,6 +37,8 @@ use Marvel\Http\Controllers\PaymentIntentController;
 use Marvel\Http\Controllers\PaymentMethodController;
 use Marvel\Http\Controllers\WebHookController;
 
+use App\Http\Controllers\PaystackWebhookController;
+
 /**
  * ******************************************
  * Available Public Routes
@@ -336,3 +338,11 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
         ]
     );
 });
+
+
+
+Route::get('/payment/initiate', [PaystackController::class, 'initiatePayment'])->name('payment.initiate');
+Route::get('/payment/callback', [PaystackController::class, 'handlePaymentCallback'])->name('payment.callback');
+
+
+Route::post('/paystack/webhook/success', [PaystackWebhookController::class, 'handleSuccess']);

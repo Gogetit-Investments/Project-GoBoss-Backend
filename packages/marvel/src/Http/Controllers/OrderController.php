@@ -382,6 +382,10 @@ class OrderController extends CoreController
                 case PaymentGatewayType::RAZORPAY:
                     $this->razorpay($order, $request, $this->settings);
                     break;
+
+                    case PaymentGatewayType::PAYSTACK:
+                        $this->paystack($order, $request, $this->settings);
+                        break;
             }
         } catch (\Exception $e) {
             throw new Exception($e);

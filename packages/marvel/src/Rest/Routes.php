@@ -36,7 +36,8 @@ use Marvel\Http\Controllers\ResourceController;
 use Marvel\Http\Controllers\PaymentIntentController;
 use Marvel\Http\Controllers\PaymentMethodController;
 use Marvel\Http\Controllers\WebHookController;
-
+use Marvel\Http\Controllers\PaystackController;
+use Marvel\Http\Controllers\PaystackWebhookController;
 /**
  * ******************************************
  * Available Public Routes
@@ -149,6 +150,10 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     Route::apiResource('reviews', ReviewController::class, [
         'only' => ['store', 'update']
     ]);
+
+    Route::post('/paystack/webhook/success', [PaystackWebhookController::class, 'handleSuccess']);
+
+
     Route::apiResource('questions', QuestionController::class, [
         'only' => ['store'],
     ]);
@@ -195,6 +200,11 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
     ]);
     Route::post('/set-default-card', [PaymentMethodController::class, 'setDefaultCard']);
     Route::post('/save-payment-method', [PaymentMethodController::class, 'savePaymentMethod']);
+
+
+    Route::get('/payment/initiate', [PaystackController::class, 'initiatePayment'])->name('payment.initiate');
+    Route::get('/payment/callback', [PaystackController::class, 'handlePaymentCallback'])->name('payment.callback');
+
 });
 
 /**
@@ -235,6 +245,7 @@ Route::group(
         ]);
         Route::get('export-order-url/{shop_id?}', 'Marvel\Http\Controllers\OrderController@exportOrderUrl');
         Route::post('download-invoice-url', 'Marvel\Http\Controllers\OrderController@downloadInvoiceUrl');
+
     }
 );
 
@@ -335,4 +346,7 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
             'only' => ['destroy', 'update'],
         ]
     );
+
+
+
 });

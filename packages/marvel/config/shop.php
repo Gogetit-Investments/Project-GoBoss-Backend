@@ -56,7 +56,7 @@ return [
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET_KEY')
     ],
 
-    'paystact' => [
+    'paystack' => [
         'payment_url' => env('PAYSTACK_PAYMENT_URL'),
         'secret_key' => env('PAYSTACK_SECRET_KEY'),
     ],

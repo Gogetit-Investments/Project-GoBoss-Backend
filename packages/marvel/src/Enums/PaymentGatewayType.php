@@ -18,4 +18,5 @@ final class PaymentGatewayType extends Enum
     public const PAYPAL = 'PAYPAL';
     public const RAZORPAY = 'RAZORPAY';
     public const MOLLIE = 'MOLLIE';
+    public const PAYSTACK = 'PAYSTACK';
 }

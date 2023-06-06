@@ -116,7 +116,7 @@ class Paystack
             $quantity = intval(request()->quantity ?? 1);
 
             $data = array_filter([
-                "amount" => intval(request()->amount) * $quantity,
+                "amount" => intval(request()->total *100) * $quantity,
                 "reference" => request()->reference,
                 "email" => request()->email,
                 "plan" => request()->plan,
