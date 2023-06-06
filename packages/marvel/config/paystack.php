@@ -35,4 +35,8 @@ return [
      */
     'merchantEmail' => getenv('MERCHANT_EMAIL'),
 
+    'callback_url' => url('/paystack/callback'),
+
+    'webhook_secret' => env('PAYSTACK_WEBHOOK_SECRET'),
+
 ];
