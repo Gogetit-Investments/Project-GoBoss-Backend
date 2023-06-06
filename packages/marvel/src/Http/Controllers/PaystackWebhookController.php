@@ -14,7 +14,7 @@ class PaystackWebhookController extends CoreController
     {
         // Retrieve the Paystack webhook data
         $payload = $request->all();
-
+return $payload;
         // Verify the webhook data if necessary
         // ...
 
@@ -29,6 +29,6 @@ class PaystackWebhookController extends CoreController
         // ...
 
         // Return a response to acknowledge the webhook
-        return response()->json(['message' => 'Webhook received and processed successfully']);
+        // return response()->json(['message' => 'Webhook received and processed successfully']);
     }
 }

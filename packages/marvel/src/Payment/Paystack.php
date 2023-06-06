@@ -28,7 +28,8 @@ class Paystack extends Base implements PaymentInterface
     try {
       extract($data);
 // Log::info($data);
-      return ['redirect_url' => PaystackFacade::getAuthorizationUrl()->url,  'is_redirect' => true];
+extract($data);
+return ['redirect_url' => PaystackFacade::getAuthorizationUrl()->url,  'is_redirect' => true];
     } catch (Exception $e) {
       throw new MarvelException(SOMETHING_WENT_WRONG_WITH_PAYMENT);
     }
