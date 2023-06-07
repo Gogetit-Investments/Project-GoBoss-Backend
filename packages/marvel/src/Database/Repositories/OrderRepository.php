@@ -492,6 +492,7 @@ class OrderRepository extends BaseRepository
                 'paid_total'       => $amount,
                 'language'         => $language,
                 "payment_gateway"  => $request->payment_gateway,
+                "transaction_reference"  => $request->reference,
             ];
 
             $order = $this->create($orderInput);
