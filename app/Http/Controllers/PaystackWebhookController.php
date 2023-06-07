@@ -16,16 +16,16 @@ class PaystackWebhookController extends Controller
         // $response = Http::get("https://api.paystack.co/transaction/{$trxref}");
 
 
-        // $response = Http::withHeaders([
-        //     "Authorization" => "Bearer " . config('shop.paystack.secret_key'),
-        //     "Cache-Control" => "no-cache",
-        //   ])->get("https://api.paystack.co/transaction/{$trxref}");
+        $response = Http::withHeaders([
+            "Authorization" => "Bearer " . config('shop.paystack.secret_key'),
+            "Cache-Control" => "no-cache",
+          ])->get("https://api.paystack.co/transaction/verify/{$trxref}");
 
 
 
         $payload = $request->all();
 
-        Log::info($trxref);
+        Log::info($response);
         // Verify the webhook data if necessary
         // ...
 
