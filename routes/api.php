@@ -345,4 +345,4 @@ Route::get('/payment/initiate', [PaystackController::class, 'initiatePayment'])-
 Route::get('/payment/callback', [PaystackController::class, 'handlePaymentCallback'])->name('payment.callback');
 
 
-Route::post('/paystack/webhook/success', [PaystackWebhookController::class, 'handleSuccess']);
+Route::get('/paystack/webhook/success', [PaystackWebhookController::class, 'handleSuccess']);
