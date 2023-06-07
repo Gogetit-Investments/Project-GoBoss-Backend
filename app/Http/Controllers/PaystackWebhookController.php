@@ -11,9 +11,12 @@ class PaystackWebhookController extends Controller
     public function handleSuccess(Request $request)
     {
         // Retrieve the Paystack webhook data
+        $trxref = $request->input('trxref');
+        $response = Http::get("https://api.paystack.co/transaction/{$trxref}");
+
         $payload = $request->all();
-       $email =  $request->input('email');
-        Log::info( $email);
+
+        Log::info($response);
         // Verify the webhook data if necessary
         // ...
 
