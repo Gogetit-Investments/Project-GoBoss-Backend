@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Marvel\Database\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Transaction; // Replace with your transaction model
 
@@ -11,7 +11,7 @@ class PaystackWebhookController extends Controller
     {
         // Retrieve the Paystack webhook data
         $payload = $request->all();
-        return $payload;
+        Log::info($payload);
         // Verify the webhook data if necessary
         // ...
 
@@ -26,6 +26,17 @@ class PaystackWebhookController extends Controller
         // ...
 
         // Return a response to acknowledge the webhook
+
+// $update_order = Order::
+// if (Order::where('id', $id)->exists()) {
+//     $department = Department::find($id);
+//     $department->department_name = is_null($request->department_name) ? $department->department_name : $request->department_name;
+//     $department->remarks = is_null($request->remarks) ? $department->remarks : $request->remarks;
+//     // $department->department_id = is_null($request->department) ? $unit->department_id : $request->department_id;
+//     $department->save();
+//     return redirect('/departments')->with('success', "ECF has successfuly been updated.");
+// }
+
         return response()->json(['message' => 'Webhook received and processed successfully']);
     }
 }
