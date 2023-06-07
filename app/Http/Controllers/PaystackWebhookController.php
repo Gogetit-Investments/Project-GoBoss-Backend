@@ -13,7 +13,15 @@ class PaystackWebhookController extends Controller
     {
         // Retrieve the Paystack webhook data
         $trxref = $request->input('trxref');
-        $response = Http::get("https://api.paystack.co/transaction/{$trxref}");
+        // $response = Http::get("https://api.paystack.co/transaction/{$trxref}");
+
+
+        $response = Http::withHeaders([
+            "Authorization" => "Bearer " . config('shop.paystack.secret_key'),
+            "Cache-Control" => "no-cache",
+          ])->get("https://api.paystack.co/transaction/{$trxref}");
+
+
 
         $payload = $request->all();
 
