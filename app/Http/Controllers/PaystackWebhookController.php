@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Marvel\Database\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Transaction; // Replace with your transaction model
+use Illuminate\Support\Facades\Log;
 
 class PaystackWebhookController extends Controller
 {
@@ -11,7 +12,7 @@ class PaystackWebhookController extends Controller
     {
         // Retrieve the Paystack webhook data
         $payload = $request->all();
-        Log::info('Me' .$payload);
+        Log::info($payload);
         // Verify the webhook data if necessary
         // ...
 
