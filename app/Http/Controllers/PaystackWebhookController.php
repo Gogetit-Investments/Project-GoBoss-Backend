@@ -11,7 +11,7 @@ class PaystackWebhookController extends Controller
     {
         // Retrieve the Paystack webhook data
         $payload = $request->all();
-        Log::info($payload);
+        Log::info('Me' .$payload);
         // Verify the webhook data if necessary
         // ...
 
