@@ -5,6 +5,7 @@ use Marvel\Database\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Transaction; // Replace with your transaction model
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class PaystackWebhookController extends Controller
 {
