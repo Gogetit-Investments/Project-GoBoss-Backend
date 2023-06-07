@@ -41,15 +41,30 @@ class PaystackWebhookController extends Controller
 
         // Return a response to acknowledge the webhook
 
-// $update_order = Order::
-// if (Order::where('id', $id)->exists()) {
-//     $department = Department::find($id);
-//     $department->department_name = is_null($request->department_name) ? $department->department_name : $request->department_name;
-//     $department->remarks = is_null($request->remarks) ? $department->remarks : $request->remarks;
-//     // $department->department_id = is_null($request->department) ? $unit->department_id : $request->department_id;
-//     $department->save();
-//     return redirect('/departments')->with('success', "ECF has successfuly been updated.");
-// }
+        if ($response->successful()) {
+            $transaction = $response->json()['data'];
+
+            // Extract the desired fields from the transaction data
+            $email = $transaction['customer']['email'];
+            $receiptNumber = $transaction['receipt_number'];
+            $amount = $transaction['amount'];
+
+            // Process the extracted data as needed
+            // ...
+
+            // if (Order::where('id', $id)->exists()) {
+            //     $department = Department::find($id);
+            //     $department->department_name = is_null($request->department_name) ? $department->department_name : $request->department_name;
+            //     $department->remarks = is_null($request->remarks) ? $department->remarks : $request->remarks;
+            //     // $department->department_id = is_null($request->department) ? $unit->department_id : $request->department_id;
+            //     $department->save();
+            //     return redirect('/departments')->with('success', "ECF has successfuly been updated.");
+            // }
+            return $transaction;
+
+        }
+
+
 
         return response()->json(['message' => 'Webhook received and processed successfully']);
     }
