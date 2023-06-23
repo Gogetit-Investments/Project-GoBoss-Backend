@@ -1,7 +1,7 @@
 {
     "name": "redq/marvel",
     "type": "project",
-    "description": "Marvel, a complete ecommerce engine for both rest and graphql",
+    "description": "an ecommerce platform for the implementation of the e-naira",
     "keywords": [
         "marvel",
         "graphql",
@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0|^8.1",
+        "aws/aws-sdk-php": "^3.273",
         "barryvdh/laravel-dompdf": "2.0.0",
         "doctrine/dbal": "3.3.7",
         "fideloper/proxy": "4.4.2",
@@ -20,11 +21,11 @@
         "laravel/tinker": "2.7.2",
         "marvel/shop": "dev-main",
         "messagebird/php-rest-api": "3.1.2",
-        "symfony/http-client": "6.0.9",
         "psr/log": "2.0.0",
+        "srmklive/paypal": "~3.0",
+        "symfony/http-client": "6.0.9",
         "symfony/mailgun-mailer": "6.0.7",
-        "twilio/sdk": "6.40.0",
-        "srmklive/paypal": "~3.0"
+        "twilio/sdk": "6.40.0"
     },
     "require-dev": {
         "spatie/laravel-ignition": "1.3.1",

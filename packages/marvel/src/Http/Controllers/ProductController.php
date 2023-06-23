@@ -19,6 +19,8 @@ use Marvel\Http\Requests\ProductCreateRequest;
 use Marvel\Http\Requests\ProductUpdateRequest;
 use Marvel\Database\Repositories\ProductRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProductController extends CoreController
 {
@@ -41,6 +43,22 @@ class ProductController extends CoreController
         $limit = $request->limit ?   $request->limit : 15;
         return $this->fetchProducts($request)->paginate($limit);
     }
+
+
+    // public function index(Request $request)
+    // {
+    //     $limit = $request->limit ? $request->limit : 15;
+
+    //     $products = $this->fetchProducts($request)
+    //         ->where('language', '=', 'en')
+    //         ->whereNull('deleted_at')
+    //         ->orderBy('created_at', 'asc')
+    //         ->paginate($limit);
+
+    //     return $products;
+    // }
+
+
 
     public function fetchProducts(Request $request)
     {
@@ -65,10 +83,53 @@ class ProductController extends CoreController
     public function store(ProductCreateRequest $request)
     {
         if ($this->repository->hasPermission($request->user(), $request->shop_id)) {
-            return $this->repository->storeProduct($request);
+
+
+            $image_64 = $request->image; //your base64 encoded data
+            // return $image_64;
+            $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+            $replace = substr($image_64, 0, strpos($image_64, ',')+1);
+          // find substring fro replace here eg: data:image/png;base64,
+           $image = str_replace($replace, '', $image_64);
+           $image = str_replace(' ', '+', $image);
+           $imageName = Str::random(10).'.'.$extension;
+           Storage::disk('nextjs_public')->put($imageName, base64_decode($image));
+        //    Storage::delete('public');
+
+        //    $imageUrl2 = '{storage/' . $imageName.'}';
+
+        $imageUrl = [
+            "id" => 477,
+            "original" => env('NEXT_JS_URL') . '/uploads/' . $imageName,
+            "thumbnail" => env('NEXT_JS_URL') . '/uploads/' . $imageName,
+        ];
+
+
+
+        //    $imageUrl2 = trim($imageUrl, '"');
+            // return $this->repository->storeProduct($request);
+            $product = new Product();
+            $product->name = $request->name;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->sale_price = $request->sale_price;
+            $product->quantity = $request->quantity;
+            $product->unit = $request->unit;
+            $product->image = $imageUrl;
+            $product->shop_id = $request->shop_id;
+            $product->type_id = 1;
+            $product->save();
+            return $product;
+
         } else {
             throw new MarvelException(NOT_AUTHORIZED);
         }
+
+
+
+
+        // return $this->repository->storeProduct($request);
+
     }
 
     /**

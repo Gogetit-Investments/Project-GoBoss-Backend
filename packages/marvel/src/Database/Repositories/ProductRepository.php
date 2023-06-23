@@ -163,9 +163,9 @@ class ProductRepository extends BaseRepository
                     }
                 }
             }
-            if (isset($request['is_digital']) && $request['is_digital'] === true && isset($request['digital_file'])) {
-                $product->digital_file()->create($request['digital_file']);
-            }
+            // if (isset($request['is_digital']) && $request['is_digital'] === true && isset($request['digital_file'])) {
+            //     $product->digital_file()->create($request['digital_file']);
+            // }
 
             $product->save();
             return $product;

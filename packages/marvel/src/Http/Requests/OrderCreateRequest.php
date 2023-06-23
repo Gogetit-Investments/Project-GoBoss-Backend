@@ -45,6 +45,7 @@ class OrderCreateRequest extends FormRequest
             'use_wallet_points' => 'nullable|boolean',
             'shipping_address'  => 'array',
             'billing_address'   => 'array',
+            // 'transaction_reference'     => 'nullable|string',
         ];
     }
 

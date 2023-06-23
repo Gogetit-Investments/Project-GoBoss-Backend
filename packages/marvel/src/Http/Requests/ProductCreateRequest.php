@@ -49,7 +49,7 @@ class ProductCreateRequest extends FormRequest
             'unit'                         => ['required', 'string'],
             'description'                  => ['nullable', 'string'],
             'sku'                          => ['string'],
-            'image'                        => ['array'],
+            // 'image'                        => ['string'],
             'gallery'                      => ['array'],
             'video'                        => ['array'],
             'status'                       => ['string', Rule::in(['publish', 'draft'])],

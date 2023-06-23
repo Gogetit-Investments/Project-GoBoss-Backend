@@ -15,25 +15,22 @@ use Illuminate\Support\Facades\Log;
 class Paystack extends Base implements PaymentInterface
 {
 //   public function getIntent($data)
-    public function getIntent(array $data): array
-  {
-    // $data = [
-    //     'amount' => 1000,
-    //     'currency' => 'NGN',
-    //     'email' => 'johndoe@example.com',
-    //     'metadata' => [
-    //         'order_id' => 123456,
-    //     ],
-    // ];
+public function getIntent(array $data): array
+{
     try {
-      extract($data);
-// Log::info($data);
-extract($data);
-return ['redirect_url' => PaystackFacade::getAuthorizationUrl()->url,  'is_redirect' => true];
+        extract($data);
+        $authorizationData = PaystackFacade::getAuthorizationUrl();
+        $redirectUrl = $authorizationData['url'];
+        $isRedirect = true;
+
+        return [
+            'redirect_url' => $redirectUrl,
+            'is_redirect' => $isRedirect,
+        ];
     } catch (Exception $e) {
-      throw new MarvelException(SOMETHING_WENT_WRONG_WITH_PAYMENT);
+        throw new MarvelException(SOMETHING_WENT_WRONG_WITH_PAYMENT);
     }
-  }
+}
 
 //   public function verify($paymentId)
 //   public function verify(array $paymentId): array

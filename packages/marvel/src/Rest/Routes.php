@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 
 use Marvel\Http\Controllers\AbusiveReportController;
 use Marvel\Http\Controllers\AddressController;
@@ -151,7 +153,7 @@ Route::group(['middleware' => ['can:' . Permission::CUSTOMER, 'auth:sanctum']], 
         'only' => ['store', 'update']
     ]);
 
-    Route::post('/paystack/webhook/success', [PaystackWebhookController::class, 'handleSuccess']);
+    // Route::post('/paystack/webhook/success', [PaystackWebhookController::class, 'handleSuccess']);
 
 
     Route::apiResource('questions', QuestionController::class, [
@@ -347,6 +349,22 @@ Route::group(['middleware' => ['permission:' . Permission::SUPER_ADMIN, 'auth:sa
         ]
     );
 
+
+
+});
+
+
+Route::post('/upload', function (Request $request) {
+    // images shouldn't exceed 2MB or it'll throw oan error.Will work on this in future
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('uploads'), $imageName);
+
+        return response()->json(['success' => true, 'image_url' => '/uploads/' . $imageName]);
+    }
+
+    return response()->json(['success' => false, 'message' => 'No image uploaded.'], 400);
 
 
 });

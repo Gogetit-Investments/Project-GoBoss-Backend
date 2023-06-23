@@ -205,15 +205,30 @@ class Paystack
      * Get the authorization url from the callback response
      * @return Paystack
      */
+    // public function getAuthorizationUrl()
+    // {
+    //     $this->makePaymentRequest();
+
+    //     $this->url = $this->getResponse()['data']['authorization_url'];
+
+    //     return $this;
+    // }
+
     public function getAuthorizationUrl()
-    {
-        $this->makePaymentRequest();
+{
+    $this->makePaymentRequest();
 
-        $this->url = $this->getResponse()['data']['authorization_url'];
+    $response = $this->getResponse();
+    $this->url = $response['data']['authorization_url'];
+    $transactionReference = $response['data']['reference'];
 
-        return $this;
-    }
 
+
+    return [
+        'url' => $this->url,
+        'transaction_reference' => $transactionReference
+    ];
+}
      /**
      * Get the authorization callback response
      * In situations where Laravel serves as an backend for a detached UI, the api cannot redirect

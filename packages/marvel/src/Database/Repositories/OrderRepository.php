@@ -36,6 +36,9 @@ use Marvel\Traits\WalletsTrait;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Exceptions\RepositoryException;
 
+use Illuminate\Support\Facades\Log;
+use Unicodeveloper\Paystack\Facades\Paystack as PaystackFacade;
+
 class OrderRepository extends BaseRepository
 {
     use WalletsTrait,
@@ -76,6 +79,7 @@ class OrderRepository extends BaseRepository
         'delivery_fee',
         'customer_contact',
         'customer_name',
+        'transaction_reference',
     ];
 
     public function boot()
@@ -105,6 +109,7 @@ class OrderRepository extends BaseRepository
      */
     public function storeOrder($request, $settings): mixed
     {
+        $request['transaction_reference'] = "ododododododo";
         $request['tracking_number'] = $this->generateTrackingNumber();
         $payment_gateway_type = isset($request->payment_gateway) ? $request->payment_gateway : PaymentGatewayType::CASH_ON_DELIVERY;
 
@@ -191,6 +196,9 @@ class OrderRepository extends BaseRepository
             PaymentGatewayType::CASH, PaymentGatewayType::CASH_ON_DELIVERY, PaymentGatewayType::FULL_WALLET_PAYMENT
         ], true)) {
             $order['payment_intent'] = $this->processPaymentIntent($request, $settings);
+
+            $v=$order['payment_intent'];
+            Log::info($v);
         }
 
 
@@ -469,6 +477,9 @@ class OrderRepository extends BaseRepository
             $product = Product::findOrFail($cartProduct['product_id']);
             $productsByShop[$product->shop_id][] = $cartProduct;
         }
+        Log::info($cartProduct );
+        $authorizationData = PaystackFacade::getAuthorizationUrl();
+        $transactionReference = $authorizationData['transaction_reference'];
 
         foreach ($productsByShop as $shop_id => $cartProduct) {
             $amount = array_sum(array_column($cartProduct, 'subtotal'));
@@ -481,6 +492,7 @@ class OrderRepository extends BaseRepository
                 'shipping_address' => $request->shipping_address,
                 'billing_address'  => $request->billing_address,
                 'customer_contact' => $request->customer_contact,
+                // 'customer_name'    => "Ajaga Jaga JAga",
                 'customer_name'    => $request->customer_name,
                 'delivery_time'    => $request->delivery_time,
                 'delivery_fee'     => 0,
@@ -492,7 +504,7 @@ class OrderRepository extends BaseRepository
                 'paid_total'       => $amount,
                 'language'         => $language,
                 "payment_gateway"  => $request->payment_gateway,
-                "transaction_reference"  => $request->reference,
+                "transaction_reference"  => $request->transaction_reference,
             ];
 
             $order = $this->create($orderInput);
