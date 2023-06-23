@@ -368,3 +368,9 @@ Route::post('/upload', function (Request $request) {
 
 
 });
+
+
+Route::get('/create-symlink', function (){
+    symlink(storage_path('/app/public'), public_path('storage'));
+    echo "Symlink Created. Thanks";
+});
