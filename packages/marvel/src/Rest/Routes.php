@@ -40,6 +40,8 @@ use Marvel\Http\Controllers\PaymentMethodController;
 use Marvel\Http\Controllers\WebHookController;
 use Marvel\Http\Controllers\PaystackController;
 use Marvel\Http\Controllers\PaystackWebhookController;
+
+use Marvel\Http\Controllers\IMGController;
 /**
  * ******************************************
  * Available Public Routes
@@ -374,3 +376,6 @@ Route::get('/create-symlink', function (){
     symlink(storage_path('/app/public'), public_path('storage'));
     echo "Symlink Created. Thanks";
 });
+
+Route::post('upload_image', [IMGController::class, 'uploadImage']);
+// Route::post('users/make-admin', [UserController::class, 'makeOrRevokeAdmin']);

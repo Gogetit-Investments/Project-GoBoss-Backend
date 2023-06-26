@@ -93,7 +93,8 @@ class ProductController extends CoreController
            $image = str_replace($replace, '', $image_64);
            $image = str_replace(' ', '+', $image);
            $imageName = Str::random(10).'.'.$extension;
-           Storage::disk('nextjs_public')->put($imageName, base64_decode($image));
+           Storage::disk('s3')->put($imageName, base64_decode($image));
+
         //    Storage::delete('public');
 
         //    $imageUrl2 = '{storage/' . $imageName.'}';

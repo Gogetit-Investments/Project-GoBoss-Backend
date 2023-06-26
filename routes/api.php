@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 
 use App\Http\Controllers\PaystackWebhookController;
-use App\Http\Controllers\ImageController;
+use App\Http\Controllers\IMGController;
 /**
  * ******************************************
  * Available Public Routes
@@ -40,3 +40,19 @@ Route::post('/upload', function (Request $request) {
 
 
 Route::post('image',[ImageController::class, 'imageStore']);
+Route::post('upload_image', [IMGController::class, 'uploadImage']);
+
+// Route::get('send-mail',function(){
+//     dd("Hi");
+// });
+Route::get('send-mail', function () {
+
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+
+    \Mail::to('vctroseji@gmail.com')->send(new \App\Mail\CreateShopMail($details));
+
+    dd("Email is Sent.");
+});

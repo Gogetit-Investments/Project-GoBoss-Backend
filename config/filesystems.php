@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -30,35 +30,36 @@ return [
 
     'disks' => [
 
-        'local' => [
-            'driver' => 'local',
-            'root' => storage_path('app'),
-        ],
+        // 'local' => [
+        //     'driver' => 'local',
+        //     'root' => storage_path('app'),
+        // ],
 
-        'public' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL') . '/uploads',
-            'visibility' => 'public',
-        ],
+        // 'public' => [
+        //     'driver' => 'local',
+        //     'root' => storage_path('app/public'),
+        //     'url' => env('APP_URL') . '/uploads',
+        //     'visibility' => 'public',
+        // ],
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
+            'key' => 'AKIATJ3BTKMVLGT4PVHA',
+            'secret' => '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',
+            'region' => 'us-east-1',
+            'bucket' => 'goboss',
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
             'visibility' => 'public',
+            // 'scheme'  => 'https',
         ],
 
-        'nextjs_public' => [
-            'driver' => 'local',
-            'root' => public_path('uploads'), // Set the root path to your Next.js public/uploads folder
-            'url' => env('NEXT_JS_URL').'/uploads', // Set the URL to access the public files
-            'visibility' => 'public',
-        ],
+        // 'nextjs_public' => [
+        //     'driver' => 'local',
+        //     'root' => public_path('app/uploads'), // Set the root path to your Next.js public/uploads folder
+        //     'url' => env('NEXT_JS_URL').'/uploads', // Set the URL to access the public files
+        //     'visibility' => 'public',
+        // ],
 
 
 

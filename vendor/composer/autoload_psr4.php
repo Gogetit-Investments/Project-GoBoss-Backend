@@ -173,6 +173,7 @@ return array(
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'BenSampo\\Enum\\' => array($vendorDir . '/bensampo/laravel-enum/src'),
     'Barryvdh\\DomPDF\\' => array($vendorDir . '/barryvdh/laravel-dompdf/src'),
+    'Aws\\Laravel\\' => array($vendorDir . '/aws/aws-sdk-php-laravel/src'),
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
     'App\\' => array($baseDir . '/app'),
 );
