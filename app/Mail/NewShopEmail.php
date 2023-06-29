@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class CreateShopMail extends Mailable
+class NewShopEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,7 +30,7 @@ class CreateShopMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Welcome To Goboss')
-                    ->view('emails.welcome-email');
+        return $this->subject('New Shop')
+                    ->view('emails.new-shop');
     }
 }

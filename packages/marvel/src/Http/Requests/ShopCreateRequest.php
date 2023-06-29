@@ -35,8 +35,8 @@ class ShopCreateRequest extends FormRequest
             'total_earnings'         => ['nullable', 'numeric'],
             'withdrawn_amount'       => ['nullable', 'numeric'],
             'current_balance'        => ['nullable', 'numeric'],
-            'image'                  => ['nullable', 'array'],
-            'cover_image'            => ['nullable', 'array'],
+            // 'image'                  => ['nullable', 'array'],
+            // 'cover_image'            => ['nullable', 'array'],
             'settings'               => ['array'],
             'address'                => ['array'],
         ];

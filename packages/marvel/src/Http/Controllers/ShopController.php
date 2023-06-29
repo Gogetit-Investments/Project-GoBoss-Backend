@@ -63,8 +63,23 @@ class ShopController extends CoreController
     public function store(ShopCreateRequest $request)
     {
         if ($request->user()->hasPermissionTo(Permission::STORE_OWNER)) {
-            return $this->repository->storeShop($request);
 
+            $details = [
+                'name' => auth()->user()->name,
+                'email' => auth()->user()->email,
+                'shop_name' => $request->input('name'),
+                'shop_description' =>$request->input('description'),
+                'goboss_commission' => $request->input('admin_commission_rate'),
+                'action_url' => 'https://shop.goboss.com.ng/admin/login',
+                'support_email' => 'hello@goboss.com.ng',
+                'platform_short_name' => 'GoBoss',
+                'platform_name' => 'GoBoss Market Hub',
+                'ceo_name' => 'Orkuma Hembe',
+                'logo' => 'https://shop.goboss.com.ng/admin/_next/image?url=%2Fadmin%2Fimage%2Flogo.jpeg&w=384&q=75'
+            ];
+
+            \Mail::to(auth()->user()->email)->send(new \App\Mail\NewShopEmail($details));
+            return $this->repository->storeShop($request);
         } else {
             throw new MarvelException(NOT_AUTHORIZED);
         }
