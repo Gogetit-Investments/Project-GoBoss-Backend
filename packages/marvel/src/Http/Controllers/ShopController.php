@@ -64,6 +64,7 @@ class ShopController extends CoreController
     {
         if ($request->user()->hasPermissionTo(Permission::STORE_OWNER)) {
             return $this->repository->storeShop($request);
+
         } else {
             throw new MarvelException(NOT_AUTHORIZED);
         }

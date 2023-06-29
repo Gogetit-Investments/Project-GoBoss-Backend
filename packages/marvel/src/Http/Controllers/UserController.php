@@ -65,7 +65,8 @@ class UserController extends CoreController
      */
     public function store(UserCreateRequest $request)
     {
-        return $this->repository->storeUser($request);
+        // return $this->repository->storeUser($request);
+
     }
 
     /**
@@ -166,9 +167,25 @@ class UserController extends CoreController
             'password' => Hash::make($request->password),
         ]);
 
+        $details = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'action_url' => 'https://shop.goboss.com.ng/admin/login',
+            'support_email' => 'hello@goboss.com.ng',
+            'platform_short_name' => 'GoBoss',
+            'platform_name' => 'GoBoss Market Hub',
+            'ceo_name' => 'Orkuma Hembe',
+            'logo' => 'https://shop.goboss.com.ng/admin/_next/image?url=%2Fadmin%2Fimage%2Flogo.jpeg&w=384&q=75'
+        ];
+
+        \Mail::to($request->email)->send(new \App\Mail\WelcomeEmail($details));
+
         $user->givePermissionTo($permissions);
         $this->giveSignupPointsToCustomer($user->id);
         return ["token" => $user->createToken('auth_token')->plainTextToken, "permissions" => $user->getPermissionNames()];
+
+
     }
 
     public function banUser(Request $request)
