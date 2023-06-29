@@ -457,8 +457,7 @@
 </head>
 
 <body>
-    <span class="preheader">Thanks for trying out [Product Name]. We’ve pulled together some information and resources
-        to help you get started.</span>
+    <span class="preheader">Thanks for signing up. We’ve pulled together some information to help you get started.</span>
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
         <tr>
             <td align="center">
