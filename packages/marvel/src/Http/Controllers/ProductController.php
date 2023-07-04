@@ -119,8 +119,29 @@ class ProductController extends CoreController
             $product->image = $imageUrl;
             $product->shop_id = $request->shop_id;
             $product->type_id = 1;
+            $product->category_id = $request->category_id;
+
+
+
+            $details = [
+                'name' => auth()->user()->name,
+                'email' => auth()->user()->email,
+                'product_name' => $request->name,
+                'product_description' =>$request->description,
+                'price' => $request->price,
+                'price' => $request->selling_price,
+                'action_url' => 'https://shop.goboss.com.ng/admin/login',
+                'support_email' => 'hello@goboss.com.ng',
+                'platform_short_name' => 'GoBoss',
+                'platform_name' => 'GoBoss Market Hub',
+                'ceo_name' => 'Orkuma Hembe',
+                'logo' => 'https://shop.goboss.com.ng/admin/_next/image?url=%2Fadmin%2Fimage%2Flogo.jpeg&w=384&q=75'
+            ];
+
+            \Mail::to(auth()->user()->email)->send(new \App\Mail\NewProductEmail($details));
             $product->save();
             return $product;
+            return $this->repository->storeShop($request);
 
         } else {
             throw new MarvelException(NOT_AUTHORIZED);

@@ -41,6 +41,12 @@ class CategoryController extends CoreController
         }
     }
 
+    public function productCategory()
+    {
+        $categories = Category::select('id', 'name')->get();
+        return $categories;
+    }
+
     /**
      * Store a newly created resource in storage.
      *

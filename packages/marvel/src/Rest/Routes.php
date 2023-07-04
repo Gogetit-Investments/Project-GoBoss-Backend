@@ -379,3 +379,4 @@ Route::get('/create-symlink', function (){
 
 Route::post('upload_image', [IMGController::class, 'uploadImage']);
 // Route::post('users/make-admin', [UserController::class, 'makeOrRevokeAdmin']);
+Route::get('product_categories', [CategoryController::class, 'productCategory']);
