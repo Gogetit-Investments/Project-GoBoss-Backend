@@ -122,7 +122,7 @@ class ProductController extends CoreController
             $product->type_id = 1;
             $product->category_id = $request->category_id;
 
-            $category = new Category();
+            // $category = new Category();
 
             $details = [
                 'name' => auth()->user()->name,
