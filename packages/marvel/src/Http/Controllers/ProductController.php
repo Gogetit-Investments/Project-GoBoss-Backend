@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Marvel\Database\Models\Product;
 use Marvel\Database\Models\Wishlist;
 use Marvel\Database\Models\Variation;
+use Marvel\Database\Models\Category;
 use Marvel\Exceptions\MarvelException;
 use Illuminate\Database\Eloquent\Collection;
 use Marvel\Http\Requests\ProductCreateRequest;
@@ -121,7 +122,7 @@ class ProductController extends CoreController
             $product->type_id = 1;
             $product->category_id = $request->category_id;
 
-
+            $category = new Category();
 
             $details = [
                 'name' => auth()->user()->name,
