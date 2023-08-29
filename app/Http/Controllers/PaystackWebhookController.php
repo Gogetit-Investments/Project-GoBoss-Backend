@@ -60,7 +60,9 @@ class PaystackWebhookController extends Controller
             //     $department->save();
             //     return redirect('/departments')->with('success', "ECF has successfuly been updated.");
             // }
-            return $email;
+            // return $email;
+            return redirect('https://shop.goboss.com.ng/order-success')->with('success', "Order successfuly placed.");
+
 
         }
 
