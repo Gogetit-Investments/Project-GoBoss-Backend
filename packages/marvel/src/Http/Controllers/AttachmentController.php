@@ -46,7 +46,7 @@ class AttachmentController extends CoreController
         foreach ($request->attachment as $media) {
             $attachment = new Attachment;
             $attachment->save();
-            $attachment->addMedia($media)->toMediaCollection();
+            // $attachment->addMedia($media)->toMediaCollection();
             foreach ($attachment->getMedia() as $media) {
                 if (strpos($media->mime_type, 'image/') !== false) {
                     $converted_url = [

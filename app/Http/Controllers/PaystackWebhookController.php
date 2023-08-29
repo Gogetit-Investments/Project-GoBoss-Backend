@@ -25,7 +25,7 @@ class PaystackWebhookController extends Controller
 
         $payload = $request->all();
 
-        Log::info($response);
+        // Log::info($response);
         // Verify the webhook data if necessary
         // ...
 
@@ -60,7 +60,7 @@ class PaystackWebhookController extends Controller
             //     $department->save();
             //     return redirect('/departments')->with('success', "ECF has successfuly been updated.");
             // }
-            return $transaction;
+            return $email;
 
         }
 

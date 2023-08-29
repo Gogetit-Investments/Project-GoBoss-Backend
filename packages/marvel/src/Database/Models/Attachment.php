@@ -18,14 +18,15 @@ class Attachment extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $table = 'attachments';
+    public $fillable = ['url'];
 
     public $guarded = [];
 
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumbnail')
-            ->width(368)
-            ->height(232)
-            ->nonQueued();
-    }
+    // public function registerMediaConversions(Media $media = null): void
+    // {
+    //     $this->addMediaConversion('thumbnail')
+    //         ->width(368)
+    //         ->height(232)
+    //         ->nonQueued();
+    // }
 }
